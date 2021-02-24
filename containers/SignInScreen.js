@@ -42,8 +42,9 @@ export default function SignInScreen({ setToken }) {
                         password: password,
                     }
                 );
-                console.log(response.data);
+
                 setToken(response.data.token);
+
                 alert("Connection successfull");
             } else {
                 setErrorMessage("Please fill all fields");
