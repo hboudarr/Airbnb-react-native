@@ -9,6 +9,7 @@ import ProfileScreen from "./containers/ProfileScreen";
 import SignInScreen from "./containers/SignInScreen";
 import SignUpScreen from "./containers/SignUpScreen";
 import SettingsScreen from "./containers/SettingsScreen";
+import Logo from "./components/Logo";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -48,7 +49,7 @@ export default function App() {
                 // No token found, user isn't signed in
                 <Stack.Navigator>
                     <Stack.Screen
-                        name="SignIn"
+                        name="SingIn"
                         options={{ animationEnabled: false }}
                     >
                         {() => <SignInScreen setToken={setToken} />}
@@ -92,13 +93,9 @@ export default function App() {
                                             <Stack.Screen
                                                 name="Home"
                                                 options={{
-                                                    title: "My App",
-                                                    headerStyle: {
-                                                        backgroundColor: "red",
-                                                    },
-                                                    headerTitleStyle: {
-                                                        color: "white",
-                                                    },
+                                                    headerTitle: (
+                                                        <Logo size="small" />
+                                                    ),
                                                 }}
                                             >
                                                 {() => <HomeScreen />}
@@ -107,7 +104,9 @@ export default function App() {
                                             <Stack.Screen
                                                 name="Profile"
                                                 options={{
-                                                    title: "User Profile",
+                                                    headerTitle: (
+                                                        <Logo size="small" />
+                                                    ),
                                                 }}
                                             >
                                                 {() => <ProfileScreen />}
@@ -133,7 +132,9 @@ export default function App() {
                                             <Stack.Screen
                                                 name="Settings"
                                                 options={{
-                                                    title: "Settings",
+                                                    headerTitle: (
+                                                        <Logo size="small" />
+                                                    ),
                                                     tabBarLabel: "Settings",
                                                 }}
                                             >

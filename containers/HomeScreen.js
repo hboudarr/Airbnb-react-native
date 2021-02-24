@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
     FlatList,
     Image,
+    StyleSheet,
 } from "react-native";
 const axios = require("axios");
 
@@ -48,58 +49,89 @@ export default function HomeScreen() {
     return isLoading ? (
         <Text>En chargement ...</Text>
     ) : (
-        <View>
+        <View style={styles.container}>
             <FlatList
                 data={data}
                 renderItem={({ item }) => {
                     return (
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigation.navigate("Profile", {
+                                    id: item._id,
+                                });
+                            }}
+                        >
                             <View>
                                 <Image
                                     source={{ uri: item.photos[0].url }}
-                                    // source={item.photos[0].url}
                                     resizeMode="contain"
+                                    style={styles.photo}
                                 ></Image>
-                                <Text>{item.price}</Text>
+                                <View style={styles.black}>
+                                    <Text style={styles.price}>
+                                        {item.price} €
+                                    </Text>
+                                </View>
                             </View>
 
                             <View>
-                                <View>
-                                    <Text>{item.description}</Text>
-                                    <View
-                                        style={{
-                                            flexDirection: "row",
-                                        }}
-                                    >
-                                        {ft_stars(item.ratingValue).map(
-                                            (star) => {
-                                                return (
-                                                    <View>
-                                                        {star === "x" ? (
-                                                            <Entypo
-                                                                name="star"
-                                                                size={24}
-                                                                color="orange"
-                                                            />
-                                                        ) : (
-                                                            <Entypo
-                                                                name="star-outlined"
-                                                                size={24}
-                                                                color="black"
-                                                            />
-                                                        )}
-                                                    </View>
-                                                );
-                                            }
-                                        )}
-                                    </View>
-                                </View>
-                                <Image
-                                    source={{
-                                        uri: item.user.account.photo.url,
+                                <View
+                                    style={{
+                                        flexDirection: "row",
                                     }}
-                                    resizeMode="contain"
-                                />
+                                >
+                                    <View style={{ width: "75%" }}>
+                                        <Text
+                                            style={styles.desc}
+                                            numberOfLines={1}
+                                        >
+                                            {item.title}
+                                        </Text>
+                                        <View
+                                            style={{
+                                                flexDirection: "row",
+                                                marginLeft: 10,
+                                                marginTop: 15,
+                                            }}
+                                        >
+                                            {ft_stars(item.ratingValue).map(
+                                                (star) => {
+                                                    return (
+                                                        <View
+                                                            style={styles.stars}
+                                                        >
+                                                            {star === "x" ? (
+                                                                <Entypo
+                                                                    name="star"
+                                                                    size={24}
+                                                                    color="orange"
+                                                                />
+                                                            ) : (
+                                                                <Entypo
+                                                                    name="star"
+                                                                    size={24}
+                                                                    color="lightgrey"
+                                                                />
+                                                            )}
+                                                        </View>
+                                                    );
+                                                }
+                                            )}
+
+                                            <Text style={styles.review}>
+                                                {item.reviews} reviews
+                                            </Text>
+                                        </View>
+                                    </View>
+                                    <Image
+                                        style={styles.avatar}
+                                        source={{
+                                            uri: item.user.account.photo.url,
+                                        }}
+                                        resizeMode="contain"
+                                    />
+                                </View>
+                                <View style={styles.separator}></View>
                             </View>
                         </TouchableOpacity>
                     );
@@ -116,3 +148,49 @@ export default function HomeScreen() {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: "white",
+    },
+    photo: {
+        width: 480,
+        height: 350,
+    },
+    black: {
+        width: 100,
+        height: 50,
+        backgroundColor: "#000",
+        justifyContent: "center",
+        alignItems: "center",
+        position: "absolute",
+        bottom: 25,
+    },
+    price: {
+        color: "white",
+        fontSize: 20,
+        fontWeight: "500",
+    },
+    desc: {
+        marginLeft: 10,
+        fontSize: 20,
+    },
+    avatar: {
+        width: 80,
+        height: 80,
+        borderRadius: 50,
+        marginLeft: 20,
+    },
+    review: {
+        fontSize: 15,
+        padding: 5,
+        color: "#BBBBBB",
+    },
+    separator: {
+        width: "90%",
+        height: 2,
+        backgroundColor: "#bbbb",
+        marginTop: 10,
+        marginLeft: 20,
+    },
+});
