@@ -9,6 +9,7 @@ import {
     FlatList,
     Image,
     StyleSheet,
+    ActivityIndicator,
 } from "react-native";
 const axios = require("axios");
 
@@ -47,7 +48,7 @@ export default function HomeScreen() {
     };
 
     return isLoading ? (
-        <Text>En chargement ...</Text>
+        <ActivityIndicator size="small" color="#EB5A62" />
     ) : (
         <View style={styles.container}>
             <FlatList

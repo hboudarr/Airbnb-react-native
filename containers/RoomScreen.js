@@ -7,7 +7,7 @@ import {
     Button,
     Text,
     View,
-    TouchableOpacity,
+    ActivityIndicator,
     Dimensions,
     Image,
     StyleSheet,
@@ -58,7 +58,8 @@ export default function RoomScreen() {
     };
 
     return isLoading ? (
-        <Text>En chargement ...</Text>
+        // <Text>En chargement ...</Text>
+        <ActivityIndicator size="small" color="#EB5A62" />
     ) : (
         <View style={styles.container}>
             <View>
