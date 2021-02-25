@@ -56,7 +56,7 @@ export default function HomeScreen() {
                     return (
                         <TouchableOpacity
                             onPress={() => {
-                                navigation.navigate("Profile", {
+                                navigation.navigate("Room", {
                                     id: item._id,
                                 });
                             }}
@@ -136,7 +136,7 @@ export default function HomeScreen() {
                         </TouchableOpacity>
                     );
                 }}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item._id}
             />
 
             <Button
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     black: {
         width: 100,
         height: 50,
-        backgroundColor: "#000",
+        backgroundColor: "#EB5A62",
         justifyContent: "center",
         alignItems: "center",
         position: "absolute",
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
         width: 80,
         height: 80,
         borderRadius: 50,
-        marginLeft: 20,
+        marginLeft: 10,
     },
     review: {
         fontSize: 15,

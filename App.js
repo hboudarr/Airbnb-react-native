@@ -6,10 +6,12 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import HomeScreen from "./containers/HomeScreen";
 import ProfileScreen from "./containers/ProfileScreen";
+import RoomScreen from "./containers/RoomScreen";
 import SignInScreen from "./containers/SignInScreen";
 import SignUpScreen from "./containers/SignUpScreen";
 import SettingsScreen from "./containers/SettingsScreen";
 import Logo from "./components/Logo";
+import BackBtn from "./components/BackBtn";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -96,6 +98,7 @@ export default function App() {
                                                     headerTitle: (
                                                         <Logo size="small" />
                                                     ),
+                                                    headerBackTitleVisible: false,
                                                 }}
                                             >
                                                 {() => <HomeScreen />}
@@ -103,13 +106,32 @@ export default function App() {
 
                                             <Stack.Screen
                                                 name="Profile"
+                                                // options={{
+                                                //     headerTitle: (
+                                                //         <Logo size="small" />
+                                                //     ),
+                                                //     headerBackTitleVisible: false,
+                                                //     headerLeft: () => (
+                                                //         <BackBtn />
+                                                //     ),
+                                                // }}
+                                            >
+                                                {() => <ProfileScreen />}
+                                            </Stack.Screen>
+
+                                            <Stack.Screen
+                                                name="Room"
                                                 options={{
                                                     headerTitle: (
                                                         <Logo size="small" />
                                                     ),
+                                                    headerBackTitleVisible: false,
+                                                    headerLeft: () => (
+                                                        <BackBtn />
+                                                    ),
                                                 }}
                                             >
-                                                {() => <ProfileScreen />}
+                                                {() => <RoomScreen />}
                                             </Stack.Screen>
                                         </Stack.Navigator>
                                     )}
@@ -147,6 +169,10 @@ export default function App() {
                                         </Stack.Navigator>
                                     )}
                                 </Tab.Screen>
+
+                                {/*  */}
+
+                                {/*  */}
                             </Tab.Navigator>
                         )}
                     </Stack.Screen>
